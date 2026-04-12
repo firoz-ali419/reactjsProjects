@@ -7,7 +7,7 @@ import TodoItem from './Components/TodoItems'
 function App() {
   const [todos,setTodos]=useState([])
 
-  const addTodo=(todo)=>{
+  const addTodo=(todo)=>{   
     setTodos((prevTodo)=>[{id:Date.now(),...todo},...prevTodo])
   }
 
@@ -19,7 +19,7 @@ function App() {
     setTodos((prevTodo)=>prevTodo.filter((prev)=>prev.id!==id))
   }
   const toggleComplete=(id)=>{
-    setTodos((prevTodo)=>prevTodo.map((prev)=>prev.id===id?[{...prev,complete:!prev.complete}]:prev))
+    setTodos((prevTodo)=>prevTodo.map((prev)=>prev.id===id?{...prev,complete:!prev.complete}:prev))
   }
 
   useEffect(()=>{
@@ -43,7 +43,7 @@ function App() {
                     <div className="flex flex-wrap gap-y-3">
                      {
                       todos.map((todo)=>(
-                        <div key={todo.id} className='w-full'>
+                        <div key={todo.id} className='w-full '>
                         <TodoItem todo={todo}/>
                         </div>
                       ))

@@ -1,38 +1,41 @@
 import React, { useState } from 'react'
 import { useTodo } from '../context'
 
+
+
 function TodoItem({ todo }) {
-    const [todoComplete,setTodoComplete]=useState(false)
-    const [isTodoEditable,setIsTodoEditable]=useState(todo.todo)
-    const [todoMsg,setTodoMsg]=useState("")
 
-    const {updateTodo,deleteTodo,toggleComplete}= useTodo()
 
-    const editTodo=()=>{
-        updateTodo(todo.id,{...todo,todoMsg})
+    const [isTodoEditable, setisTodoEditable] = useState(false)
+    const [todoMsg, setTodoMsg] = useState(todo.todo)
+
+    const { updateTodo, deleteTodo, toggleComplete } = useTodo()
+
+    const editTodo = () => {
+        updateTodo(todo.id, { ...todo, todo: todoMsg })
+        setisTodoEditable(false)
     }
 
-    const toggleCompleted=()=>{
+    const toggleCompleted = () => {
         toggleComplete(todo.id)
+
     }
 
     return (
         <div
-            className={`flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3 shadow-sm shadow-white/50 duration-300  text-black ${
-                todo.completed ? "bg-[#c6e9a7]" : "bg-[#ccbed7]"
-            }`}
+            className={`flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3
+                 shadow-sm shadow-black/50 duration-300  text-black ${todo.completed ? "bg-[#c6e9a7]" : "bg-[#ccbed7]" }`}
         >
             <input
                 type="checkbox"
                 className="cursor-pointer"
                 checked={todo.completed}
-                onChange={toggleComplete}
+                onChange={toggleCompleted}
             />
             <input
                 type="text"
-                className={`border outline-none w-full bg-transparent rounded-lg text-white ${
-                    isTodoEditable ? "border-black/10 px-2" : "border-transparent"
-                } ${todo.completed ? "line-through" : ""}`}
+                className={`border outline-none w-full bg-transparent rounded-lg text-black ${isTodoEditable ? "border-black/10 px-2" : "border-transparent"
+                    } ${todo.completed ? " !line-through opacity-50" : "no-underline opacity-100"}`}
                 value={todoMsg}
                 onChange={(e) => setTodoMsg(e.target.value)}
                 readOnly={!isTodoEditable}
@@ -45,7 +48,7 @@ function TodoItem({ todo }) {
 
                     if (isTodoEditable) {
                         editTodo();
-                    } else setIsTodoEditable((prev) => !prev);
+                    } else setisTodoEditable((prev) => !prev);
                 }}
                 disabled={todo.completed}
             >
@@ -63,3 +66,5 @@ function TodoItem({ todo }) {
 }
 
 export default TodoItem;
+
+
