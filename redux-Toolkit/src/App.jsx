@@ -1,16 +1,18 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+
+import AddTodo from './components/AddTodo'
+import Todo from './components/Todo'
+import { Provider } from 'react-redux'
+import { store } from './Store/store'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-     <h1>Hello world!!!</h1>
-    </>
+    <Provider store={store}>
+     <AddTodo/>
+     <Todo/>
+    </Provider>
   )
 }
 
