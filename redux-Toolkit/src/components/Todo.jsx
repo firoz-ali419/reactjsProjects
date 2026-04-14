@@ -1,14 +1,12 @@
-import React from 'react'
+
 import { useSelector, useDispatch } from 'react-redux'
-import { removeTodo } from '../features/todo/todoSlice.js'
-
-
+import { removeTodo} from '../features/todo/todoSlice.js'
 
 
 
 function Todo() {
+   
     const todos = useSelector(state => state.todos)
-    console.log("todos",todos);
     
     const dispatch = useDispatch()
     return (
@@ -22,7 +20,7 @@ function Todo() {
                             key={todo.id}
                         >
                             <div className='text-white'>{todo.text}</div>
-                          
+                   
                             <button
                                 onClick={() => dispatch(removeTodo(todo.id))}
                                 className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
